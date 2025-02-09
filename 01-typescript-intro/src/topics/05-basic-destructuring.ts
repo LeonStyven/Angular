@@ -20,4 +20,22 @@ const audioPlayer: AudioPlayer = {
     }
 }
 
+const song = 'New song';
+
+// const { author:author } = audioPlayer.details;
+
+const { song:anotherSong, songDuration:duration, details
+} = audioPlayer;
+
+const { author } = details;
+
+console.log('Song: ', anotherSong)
+console.log('Author: ', author)
+console.log('Duration: ', duration)
+
+const dbz: string[] = ['Goku', 'Vegeta', 'Trunks'];
+const trunk = dbz[3] || 'No hay personaje';
+
+
+console.log('Personaje 3: ', trunk )
 
