@@ -12,7 +12,7 @@ const shoppingCart: Product[] = [
     }
 ];
 
-//tax = 0.15
+//tax = 0.15%
 const [ total, tax ] = taxCalculation({
     products: shoppingCart,
     tax: 0.15
@@ -20,4 +20,4 @@ const [ total, tax ] = taxCalculation({
 
 
 console.log('Total', total);
-console.log('Total', tax);
+console.log('Tax', tax);
