@@ -5,7 +5,8 @@
 // import './topics/04-homework-types'
 // import './topics/06-function-destructuring'
 // import './topics/07-import-export'
-import './topics/08-clases'
+// import './topics/08-clases'
+import './topics/09-generics'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = 
 `
