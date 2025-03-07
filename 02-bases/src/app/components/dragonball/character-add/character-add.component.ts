@@ -10,6 +10,7 @@ export class CharacterAddComponent {
   name = signal('');
   power = signal(0);
 
+  //Hacer que el componente envíe información de tipo Character
   newCharacter = output<Character>();
 
   addCharacter() {
@@ -23,7 +24,7 @@ export class CharacterAddComponent {
       power: this.power(),
     };
 
-    /* this.characters.update((list) => [...list, newCharacter]); */
+    //Enviar la información del New Caracter
     this.newCharacter.emit(newCharacter);
     this.resetFields();
   }

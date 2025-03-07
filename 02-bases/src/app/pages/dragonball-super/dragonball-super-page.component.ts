@@ -31,6 +31,7 @@ export class DragonballSuperPageComponent {
     };
   });
 
+  //Se recibe la info desde el componente hijoy se concatena el nuevo personaje
   addCharacter(newCharacter: Character) {
     this.characters.update((list) => [...list, newCharacter]);
   }

@@ -3,6 +3,9 @@
 
 <section class="row mx-2">
     <div class="col-12 col-sm-6">
+        <!-- Desde el padre se recibe la información haciendo referencia al evento
+        y a la función que llama se le envía el evento (Trae el Character) 
+        -->
         <dragonball-character-add
         (newCharacter)="addCharacter($event)"
         />
