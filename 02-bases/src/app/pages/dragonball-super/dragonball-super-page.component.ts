@@ -7,13 +7,16 @@ interface Character {
 }
 
 @Component({
-  templateUrl: './dragonball-page.component.html',
+  templateUrl: './dragonball-super-page.component.html',
 })
-export class DragonballPageComponent {
+export class DragonballSuperPageComponent {
   name = signal('');
   power = signal(0);
 
-  characters = signal<Character[]>([{ id: 1, name: 'Goku', power: 9001 }]);
+  characters = signal<Character[]>([
+    { id: 1, name: 'Goku', power: 9001 },
+    { id: 2, name: 'Vegeta', power: 8000 },
+  ]);
 
   powerClasses = computed(() => {
     return {
