@@ -7,15 +7,15 @@
         y a la función que llama se le envía el evento (Trae el Character) 
         -->
         <dragonball-character-add
-        (newCharacter)="addCharacter($event)"
+        (newCharacter)="dragonballService.addCharacter($event)"
         />
     </div>
 
-    
+
     <div class="col-12  col-sm-6">
         <dragonball-character-list 
             listName="Listado de Personajes"
-            [characters]="characters()" 
+            [characters]="dragonballService.characters()" 
         />
     </div>
 </section>

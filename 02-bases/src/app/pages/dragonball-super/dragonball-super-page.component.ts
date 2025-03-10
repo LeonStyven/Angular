@@ -1,6 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CharacterListComponent } from '../../components/dragonball/character-list/character-list.component';
 import { CharacterAddComponent } from '../../components/dragonball/character-add/character-add.component';
+import { DragonballService } from '../../services/dragonball.service';
 
 interface Character {
   id: number;
@@ -17,27 +18,12 @@ interface Character {
   ],
 })
 export class DragonballSuperPageComponent {
-  name = signal('');
-  power = signal(0);
 
-  characters = signal<Character[]>([
-    { id: 1, name: 'Goku', power: 9001 },
-    { id: 2, name: 'Vegeta', power: 8000 },
-  ]);
+  public dragonballService = inject(DragonballService);
 
-  powerClasses = computed(() => {
-    return {
-      'text-danger': true,
-    };
-  });
-
-  //Se recibe la info desde el componente hijoy se concatena el nuevo personaje
-  addCharacter(newCharacter: Character) {
-    this.characters.update((list) => [...list, newCharacter]);
-  }
-
-  resetFields() {
-    this.name.set('');
-    this.power.set(0);
-  }
+  //INJECCION TRADICIONAL
+ /*  constructor(
+    public dragonballService: DragonballService
+  ) {}
+  */
 }
