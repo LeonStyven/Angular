@@ -1,23 +1,29 @@
-
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { Character } from '../interfaces/character.interface';
 
+const loadFromLocalStorage = (): Character[] => {
+  const characters = localStorage.getItem('characters');
+
+  return characters ? JSON.parse(characters) : [];
+};
+
 //Dependency Injection (DI)
-// Funciona como un singleton, es decir, Angular crea una instancia de la clase y la reutiliza en 
+// Funciona como un singleton, es decir, Angular crea una instancia de la clase y la reutiliza en
 // toda la aplicación.
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DragonballService {
+  characters = signal<Character[]>(loadFromLocalStorage());
 
-    characters = signal<Character[]>([
-        { id: 1, name: 'Goku', power: 9001 },
-        { id: 2, name: 'Vegeta', power: 8000 },
-      ]);
-    
-      //Se recibe la info desde el componente hijoy se concatena el nuevo personaje
-      addCharacter(newCharacter: Character) {
-        this.characters.update((list) => [...list, newCharacter]);
-      }    
-    
+  saveToLocalStorange = effect(() => {
+    /* console.log(`Character count ${this.characters().length}`); */
+
+    //Se envia el contenido al Local Storage para su persistencia
+    localStorage.setItem('chatacters', JSON.stringify(this.characters()));
+  });
+
+  //Se recibe la info desde el componente hijo y se concatena el nuevo personaje
+  addCharacter(newCharacter: Character) {
+    this.characters.update((list) => [...list, newCharacter]);
+  }
 }
-
