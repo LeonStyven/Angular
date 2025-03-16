@@ -7,5 +7,5 @@ import { GifListItemComponent } from './gif-list-item/gif-list-item.component';
   templateUrl: './gif-list.component.html',
 })
 export class GifListComponent {
-  gifs = input.required<string[]>();
+  gifs = input.required<string[]>(); //Guarda el listado de gifs para enviarselos al componente hijo (gif-list-item)
 }
