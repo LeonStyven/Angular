@@ -1,8 +1,9 @@
 import {
-  ChangeDetectionStrategy,
   Component,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { GifListComponent } from '../../components/gif-list/gif-list.component';
 import { GifService } from '../../services/gifs.service';
@@ -24,11 +25,17 @@ import { GifService } from '../../services/gifs.service';
 
 @Component({
   selector: 'app-trending-page',
-  imports: [GifListComponent],
   templateUrl: './trending-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TrendingPageComponent {
-  // Importar el servicio de gifs
-  gifService = inject(GifService); //Se verifica si hay alguna instancia de GifService en el árbol de inyección de dependencias, si la encuentra entonces la inyecta tal cual como esté.
+  // Importar el servicio de gifs Se verifica si hay alguna instancia de GifService en el árbol de inyección de dependencias, si la encuentra entonces la inyecta tal cual como esté.
+  gifService = inject(GifService);
+
+  scrollDivRef = viewChild<ElementRef>('groupDiv');
+
+  onScroll(event: Event) {
+    const scrollDiv = this.scrollDivRef()?.nativeElement;
+
+    console.log(scrollDiv);
+  }
 }
