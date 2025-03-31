@@ -22,7 +22,9 @@ export class GifService {
   private http = inject(HttpClient); // Inyección de dependencias
 
   trendingGifs = signal<Gif[]>([]); // Señal que contiene los gifs trending [gif, gif, gif, gif, gif, gif]
-  trendingGifsLoading = signal(true); // Señal que indica si se está cargando los gifs trending
+  trendingGifsLoading = signal(false); // Señal que indica si se está cargando los gifs trending
+
+  private trendingPage = signal(0); // Señal que indica la página actual de los gifs trending
 
   trendingGifGroup = computed<Gif[][]>(() => {
     const groups = [];
@@ -50,18 +52,24 @@ export class GifService {
 
   // Carga los gifs trending haciendo una petición HTTP a la API de Giphy
   loadTrendingGifs() {
+    if (this.trendingGifsLoading()) return;
+
+    this.trendingGifsLoading.set(true);
+
     this.http
       .get<GiphyResponse>(`${environment.giphyUrl}/gifs/trending`, {
         // URL de la API de Giphy
         params: {
           api_key: environment.giphyApiKey,
           limit: 20,
+          offset: this.trendingPage() * 20,
         },
       }) //Es necesario realizar una suscripcion para así poder ejecutar y esperar la respuesta del servicio
       .subscribe((resp) => {
         const gifs = GifMapper.mapGiphyItemsToGifArray(resp.data); // Mapea los gifs de la respuesta a un array de Gif
-        this.trendingGifs.set(gifs);
+        this.trendingGifs.update((currentGifs) => [...currentGifs, ...gifs]);
         this.trendingGifsLoading.set(false);
+        this.trendingPage.update((currentPage) => currentPage + 1);
         console.log(gifs);
       });
   }
