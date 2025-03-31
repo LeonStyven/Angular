@@ -20,8 +20,19 @@ const loadFromLocalStorage = () => {
 @Injectable({ providedIn: 'root' })
 export class GifService {
   private http = inject(HttpClient); // Inyección de dependencias
-  trendingGifs = signal<Gif[]>([]); // Señal que contiene los gifs trending
+
+  trendingGifs = signal<Gif[]>([]); // Señal que contiene los gifs trending [gif, gif, gif, gif, gif, gif]
   trendingGifsLoading = signal(true); // Señal que indica si se está cargando los gifs trending
+
+  trendingGifGroup = computed<Gif[][]>(() => {
+    const groups = [];
+    for (let i = 0; i < this.trendingGifs().length; i += 3) {
+      groups.push(this.trendingGifs().slice(i, i + 3));
+    }
+    console.log(groups);
+
+    return groups; //[ [gif, gif, gif], [gif, gif, gif], [gif, gif, gif] ]
+  });
 
   searchHistory = signal<Record<string, Gif[]>>(loadFromLocalStorage()); // Señal que contiene el historial de búsquedas
   searchhistoryKeys = computed(() => Object.keys(this.searchHistory()));
