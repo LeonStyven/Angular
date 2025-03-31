@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { GifMapper } from '../mapper/gif.mapper';
 import { map, Observable, tap } from 'rxjs';
@@ -7,19 +7,35 @@ import { map, Observable, tap } from 'rxjs';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import type { Gif } from '../interfaces/gif.interface';
 
+const GIF_KEY = 'gifs';
+
+const loadFromLocalStorage = () => {
+  const gifsFromLocalStorage = localStorage.getItem(GIF_KEY) ?? '{}'; //Record<string, Gif[]>
+  const gifs = JSON.parse(gifsFromLocalStorage);
+
+  console.log(gifs);
+  return gifs;
+};
+
 @Injectable({ providedIn: 'root' })
 export class GifService {
   private http = inject(HttpClient); // Inyección de dependencias
   trendingGifs = signal<Gif[]>([]); // Señal que contiene los gifs trending
   trendingGifsLoading = signal(true); // Señal que indica si se está cargando los gifs trending
 
-  searchHistory = signal<Record<string, Gif[]>>({}); // Señal que contiene el historial de búsquedas
+  searchHistory = signal<Record<string, Gif[]>>(loadFromLocalStorage()); // Señal que contiene el historial de búsquedas
   searchhistoryKeys = computed(() => Object.keys(this.searchHistory()));
 
   // Carga los gifs trending al iniciar el servicio
   constructor() {
     this.loadTrendingGifs();
   }
+
+  //Guardar el historial de búsquedas en el localStorage
+  saveGifsToLocalStorage = effect(() => {
+    const historyString = JSON.stringify(this.searchHistory());
+    localStorage.setItem(GIF_KEY, historyString);
+  });
 
   // Carga los gifs trending haciendo una petición HTTP a la API de Giphy
   loadTrendingGifs() {
