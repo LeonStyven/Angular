@@ -31,11 +31,20 @@ export default class TrendingPageComponent {
   // Importar el servicio de gifs Se verifica si hay alguna instancia de GifService en el árbol de inyección de dependencias, si la encuentra entonces la inyecta tal cual como esté.
   gifService = inject(GifService);
 
-  scrollDivRef = viewChild<ElementRef>('groupDiv');
+  scrollDivRef = viewChild<ElementRef<HTMLDivElement>>('groupDiv');
 
   onScroll(event: Event) {
     const scrollDiv = this.scrollDivRef()?.nativeElement;
+    if (!scrollDiv) return;
 
-    console.log(scrollDiv);
+    const scrollTop = scrollDiv.scrollTop; // Posición actual del scroll
+    const clientHeight = scrollDiv.clientHeight; // Altura visible del scroll
+    const scrollHeight = scrollDiv.scrollHeight; // Altura total del scroll
+
+    /* console.log({ scrollTotal: scrollTop + clientHeight, scrollHeight }); */
+
+    const isAtBottom = scrollTop + clientHeight + 300 >= scrollHeight;
+
+    console.log({ isAtBottom });
   }
 }
