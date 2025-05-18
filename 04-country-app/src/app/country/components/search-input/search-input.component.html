@@ -1,0 +1,20 @@
+<section class="flex flex-row gap-2 mt-2">
+
+  <input
+  type="text"
+  class="input input-bordered mr-2 w-56"
+  placeholder="Buscar por capital"
+  autofocus
+  #txtSearch
+  (keyup.enter)="NewCountrySearch(txtSearch.value)"
+  >
+
+
+  <button
+  class="btn btn-primary"
+  (click)="NewCountrySearch(txtSearch.value)"
+  >
+    Buscar
+  </button>
+
+</section>
