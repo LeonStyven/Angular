@@ -3,11 +3,15 @@ import { CountryLayoutPageComponent } from './Layouts/CountryLayoutPage/CountryL
 import { ByCapitalPageComponent } from "./pages/by-capital-page/by-capital-page.component";
 import { ByCountryPageComponent } from "./pages/by-country-page/by-country-page.component";
 import { ByRegionPageComponent } from "./pages/by-region-page/by-region-page.component";
+import { CountryPageComponent } from "./pages/country-page/country-page.component";
 
 
 
 export const countryRoutes: Routes = [
-
+  {
+    path: 'search/:name',
+    component: CountryPageComponent
+  },
   {
     path: '',
     component:  CountryLayoutPageComponent,
@@ -30,6 +34,11 @@ export const countryRoutes: Routes = [
       }
     ]
   },
+  {
+    path: '**',
+    component: CountryLayoutPageComponent
+  }
+
 
   /* {
     path: 'country',
