@@ -1,0 +1,23 @@
+
+<nav class="p-4 w-full">
+    <ul class="menu bg-base-200 sm:menu-horizontal rounded-box">
+        <li>
+          <a [routerLink]="['/country/by-capital']" routerLinkActive="btn-primary" class=" btn" >
+            <i class="fa-solid fa-plane"></i>
+            Por Capital
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/country/by-country']" routerLinkActive="btn-primary" class=" btn">
+            <i class="fa-solid fa-flag"></i>
+            Por Pais
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/country/by-region']" routerLinkActive="btn-primary" class=" btn">
+            <i class="fa-solid fa-earth-americas"></i>
+            Por Region
+          </a>
+        </li>
+    </ul>
+</nav>
