@@ -6,21 +6,26 @@
                 <th>Ícono</th>
                 <th>Bandera</th>
                 <th>Nombre</th>
-                <th>Capital</th>
                 <th>Población</th>
+                <th>Capital</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>#</th>
-                <th>Ícono</th>
-                <th>Bandera</th>
-                <th>Nombre</th>
-                <th>Capital</th>
-                <th>Población</th>
-                <th></th>
-            </tr>
+            @for (country of countries(); track country.cca2; let index = $index) {
+                <tr>
+                    <td>{{ index + 1}}</td>
+                    <td>{{ country.flag }}</td>
+                    <td>
+                        <img [src]="country.flags.svg" [alt]="country.name.common" class="w-10">
+                    </td>
+                    <td>{{country.name.common}}</td>
+                    <td> {{ country.population }}</td>
+                    <td>{{ country.capital }}</td>
+                    <td><a class="link-primary cursor-pointer">Más Informacion <i class="fa-solid fa-up-right-from-square"></i></a></td>
+                </tr>
+
+            }
         </tbody>
     </table>
 </section>
