@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { CountryLayoutComponent } from "./layouts/countryLayout/countryLayout.component";
+import { CountryLayoutComponent } from "./layouts/country-layout/country-layout.component";
 import { ByCapitalPageComponent } from "./pages/by-capital-page/by-capital-page.component";
 import { ByCountryPageComponent } from "./pages/by-country-page/by-country-page.component";
 import { ByRegionPageComponent } from "./pages/by-region-page/by-region-page.component";

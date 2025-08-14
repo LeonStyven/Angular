@@ -5,7 +5,7 @@ import { TopMenuComponent } from "../../components/top-menu/top-menu.component";
 @Component({
   selector: 'app-country-layout',
   imports: [RouterOutlet, TopMenuComponent],
-  templateUrl: './countryLayout.component.html',
+  templateUrl: './country-layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryLayoutComponent { }
