@@ -33,10 +33,10 @@ export class ByCapitalPageComponent {
           this.countries.set(countries);
 
       },
-      error: (error) => {
+      error: (err) => {
         this.isLoading.set(false);
         this.countries.set([]);
-        this.isError.set(`No se encontró ningun pais que contenga ${query}`)
+        this.isError.set(err)
       }
     })
     
