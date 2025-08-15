@@ -26,12 +26,18 @@ export class ByCapitalPageComponent {
     
     
     this.countryService.searchByCapital(query)
-    .subscribe( countries => {
-      this.isLoading.set(false);
-      this.countries.set(countries);
+    .subscribe({
+      next:(countries) => {
+        
+          this.isLoading.set(false);
+          this.countries.set(countries);
 
-      // * Visualizar el resultado de la consulta
-      /* console.log(countries) */
+      },
+      error: (error) => {
+        this.isLoading.set(false);
+        this.countries.set([]);
+        this.isError.set(`No se encontró ningun pais que contenga ${query}`)
+      }
     })
     
   }
