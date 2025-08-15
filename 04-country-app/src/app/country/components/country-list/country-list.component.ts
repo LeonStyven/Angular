@@ -1,4 +1,4 @@
-import { RESTCountry } from './../../interfaces/rest-countries.interface';
+import { Country } from '../../interfaces/country.interface';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
@@ -9,5 +9,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class CountryListComponent {
 
-  countries = input.required<RESTCountry[]>();
+  countries = input.required<Country[]>();
 }
