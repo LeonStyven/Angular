@@ -6,8 +6,8 @@
                 <th>Ícono</th>
                 <th>Bandera</th>
                 <th>Nombre</th>
-                <th>Población</th>
                 <th>Capital</th>
+                <th>Población</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,8 +20,10 @@
                         <img [src]="country.flagsvg" [alt]="country.name" class="w-10">
                     </td>
                     <td>{{country.name}}</td>
-                    <td> {{ country.population }}</td>
                     <td>{{ country.capital }}</td>
+                    <span class="badge badge-secondary">
+                        <td> {{ country.population | number}}</td>
+                    </span>
                     <td><a class="link-primary cursor-pointer">Más Informacion <i class="fa-solid fa-up-right-from-square"></i></a></td>
                 </tr>
 
