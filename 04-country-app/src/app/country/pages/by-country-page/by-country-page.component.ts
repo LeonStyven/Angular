@@ -22,7 +22,7 @@ export class ByCountryPageComponent {
     loader: async( {params} ) => { //recibe the params and return a PROMISE
       if( !params.query ) return[]; // if not query, return empty array
       
-      return firstValueFrom( //Convert the observable to a promise
+      return await firstValueFrom( //Convert the observable to a promise
         this.countryService.searchByCountry(params.query) //makes the search
       )
     }

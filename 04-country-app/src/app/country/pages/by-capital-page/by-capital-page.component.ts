@@ -17,12 +17,12 @@ export class ByCapitalPageComponent {
 
   //This is when we start this >:c
   countryResource = resource({
-
+    // una funcion que se define enviando un obj de configuracion (Parametros - Loader asyncrono)
     params: () => ({query: this.query()}), //query de busqueda
     loader: async( {params} ) => { //recibe the params and return a PROMISE
       if( !params.query ) return[]; // if not query, return empty array
       
-      return firstValueFrom( //Convert the observable to a promise
+      return await firstValueFrom( //Convert the observable to a promise
         this.countryService.searchByCapital(params.query) //makes the search
       )
     }
