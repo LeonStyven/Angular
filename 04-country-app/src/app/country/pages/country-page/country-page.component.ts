@@ -20,9 +20,12 @@ export class CountryPageComponent {
     loader: async( {params} ) => {
       /* if */ // * Validar si el codigo existe
 
-      return await firstValueFrom(
+      const country = await firstValueFrom(
         this.countryService.searchCountryByAlphaCode(params.countryCode)
       )
+      
+      console.log('Country data from mapper:', country);
+      return country;
     }
   })
 
