@@ -7,7 +7,6 @@ export interface Country {
     capital: string;
     population: number;
     language: string;
-    officialName: string;
     borders: string[];
     coatOfArms: string;
     translations: string[];

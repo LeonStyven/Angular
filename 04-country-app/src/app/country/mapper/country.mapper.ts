@@ -19,7 +19,6 @@ export class CountryMapper {
             population: item.population,
             capital: item.capital.join(','),
             language: Object.values(item.languages)[0] ?? 'No language specified',
-            officialName: item.name.official,
             borders: item.borders ?? [],
             coatOfArms: item.coatOfArms.svg ?? '',
             translations: Object.values(item.translations).map(t => `${t.common} (${t.official})`),
