@@ -53,7 +53,10 @@
             @if(isLoading() && !errorMessage()){
                 <tr>
                     <td colspan="9" class="text-center">
-                        Cargando...
+                        <button class="btn">
+                            <span class="loading loading-spinner"></span>
+                            loading
+                          </button>
                     </td>
                 </tr>
             }
