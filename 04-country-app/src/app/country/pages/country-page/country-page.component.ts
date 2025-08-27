@@ -1,24 +1,23 @@
-import { CountryService } from './../../services/country.service';
 import { Component, inject, resource } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { firstValueFrom, Observable } from 'rxjs';
+import { CountryInformationComponent } from "./country-information/country-information.component";
+import { CountryService } from '../../services/country.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { NotFoundComponent } from "../../../shared/components/not-found/not-found.component";
-import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-country-page',
-  imports: [NotFoundComponent, DecimalPipe, RouterLink],
+  imports: [CountryInformationComponent, NotFoundComponent],
   templateUrl: './country-page.component.html',
 })
 export class CountryPageComponent {
 
   countryService = inject(CountryService); // Inject the CountryService
-  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  countryCode = inject(ActivatedRoute).snapshot.params['code'];
+  countryCode = this.route.snapshot.params['code'];
   countryResource = resource({
-
-    params: () => ({countryCode: this.countryCode}),
+    params: () => ({countryCode: this.route.snapshot.params['code']}),
     loader: async( {params} ) => {
       /* if */ // * Validar si el codigo existe
 

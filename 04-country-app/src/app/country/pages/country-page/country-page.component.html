@@ -15,56 +15,10 @@
 
 @if( countryResource.hasValue()){
 
-    <div class="flex w-full place-content-between">
-        <div class="flex">
-            <img [src]="countryResource.value().flagsvg" [alt]="countryResource.value().name" class="h-8 self-center mr-4">
-            <h3 class="text-6xl font-black self-center">{{countryResource.value().name}}</h3>
-            <h3 class="text-2xl font-black">{{countryResource.value().flag}}</h3>
-        </div>
-        <div class=" flex flex-col">
-            <h1 class="mb-2 w-full text-right pr-5">Borders</h1>
-            <div class="flex">
-                @for (border of countryResource.value().borders; track $index) {
-                    <button 
-                        [routerLink]="['/country/by/',border]"
-                        class="btn mr-4 px-4 py-2 rounded-md cursor-pointer"
-                    >
-                        {{border}}
-                        <i class="ml-1 fa-solid fa-up-right-from-square"></i>
-                    </button>
-                }
-            </div>
-        </div>
-    </div>
-    <h3><i class="mr-2 fa-solid fa-location-dot"></i> {{countryResource.value().capital}}</h3>
-    <h3><i class="mr-2 fa-solid fa-language"></i>{{countryResource.value().language}}</h3>
-    <h3><i class="mr-2 fa-solid fa-people-group"></i>{{countryResource.value().population | number}}</h3>
+    <country-information
+    [country]="countryResource.value()"
+    />
+
+
     
-    <h2 class="mt-8 text-xl">Traducciones</h2>
-
-    <div class="overflow-x-auto mb-12">
-        <table class="table">
-          <!-- head -->
-          <thead>
-            <tr>
-              <th></th>
-              <th>Oficial</th>
-              <th>Común</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- row 2 -->
-            @for (translation of countryResource.value().translations; track $index) {
-                <tr class="hover:bg-base-300">
-                    <th>{{$index+1}}</th>
-                    <td>
-                        {{translation.split(' (')[1].replace(')', '')}}
-                    </td>
-                    <td>{{translation.split(' (')[0]}}</td>
-                  </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
 }
