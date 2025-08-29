@@ -21,9 +21,7 @@ export class ByRegionPageComponent {
     ];
     
   countryService = inject(CountryService);
-  query = signal('');
-
-  
+  query = signal<Region | undefined>(undefined);
 
   countryResource = resource({
 

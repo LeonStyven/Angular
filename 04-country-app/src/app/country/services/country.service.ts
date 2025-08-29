@@ -4,6 +4,7 @@ import { RESTCountry } from '../interfaces/rest-countries.interface';
 import { map, Observable, catchError, throwError, delay, of, tap } from 'rxjs';
 import { Country } from '../interfaces/country.interface';
 import { CountryMapper } from '../mapper/country.mapper';
+import { Region } from '../interfaces/region.type';
 
 const API_URL = 'https://restcountries.com/v3.1'
 
@@ -15,7 +16,7 @@ export class CountryService {
   private http = inject(HttpClient);
   private queryCacheCapital = new Map<string, Country[]>();
   private queryCacheCountry = new Map<string, Country[]>();
-  private queryCacheRegion = new Map<string, Country[]>();
+  private queryCacheRegion = new Map<Region, Country[]>();
 
 
 
@@ -30,7 +31,7 @@ export class CountryService {
       .pipe(
         map( CountryMapper.mapRESTCountryArrayToCountryArray),
         tap( countries => this.queryCacheCapital.set(query, countries)),
-        delay(1000),
+        //delay(1000),
         catchError(error => {
           console.log('Error fetching ', error);
 
@@ -52,7 +53,7 @@ export class CountryService {
       .pipe(
         map(CountryMapper.mapRESTCountryArrayToCountryArray),
         tap( countries => this.queryCacheCountry.set(query, countries)),
-        delay(1000),
+        //delay(1000),
         catchError(error => {
           console.log('Error fetching ', error);
 
@@ -61,39 +62,17 @@ export class CountryService {
       )
   }
 
-
-  searchCountryByAlphaCode(code: string){
-
-    return this.http.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
-      .pipe(
-        map(CountryMapper.mapRESTCountryArrayToCountryArray),
-        map( countries => countries.at(0)),
-        delay(1000),
-        catchError(error => {
-          console.log('Error fetching ', error);
-
-          return throwError (() => new Error (`No se pudo obtener ningun pais conel codigo ${code}`))
-        })
-      )
-  }
-
-  // * TODO: SearchCountriesByRegion
-
-
-  searchCountriesByRegion(regionQuery: string){
-    regionQuery = regionQuery.toLowerCase();
+  searchCountriesByRegion(regionQuery: Region){
 
     if (this.queryCacheRegion.has(regionQuery)){
-      return of(this.queryCacheCountry.get(regionQuery)!);
+      return of(this.queryCacheRegion.get(regionQuery)!);
     }
-
-    console.log('API')
 
     return this.http.get<RESTCountry[]>(`${API_URL}/region/${regionQuery}`)
     .pipe(
       map(CountryMapper.mapRESTCountryArrayToCountryArray),
       tap( countries => this.queryCacheRegion.set(regionQuery, countries)),
-      delay(1000),
+      //delay(1000),
       catchError(error => {
         console.log('Error fetching ', error);
         
@@ -102,6 +81,20 @@ export class CountryService {
     )
   }
 
+  searchCountryByAlphaCode(code: string){
+
+    return this.http.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
+      .pipe(
+        map(CountryMapper.mapRESTCountryArrayToCountryArray),
+        map( countries => countries.at(0)),
+        //delay(1000),
+        catchError(error => {
+          console.log('Error fetching ', error);
+
+          return throwError (() => new Error (`No se pudo obtener ningun pais conel codigo ${code}`))
+        })
+      )
+  }
 
 
 }

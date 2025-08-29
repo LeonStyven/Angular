@@ -12,7 +12,7 @@ export class RegionSelectorComponent {
   selectedRegion: string = '';
 
   regions = input<Region[]>([]);
-  regionQuery = output<string>();
+  regionQuery = output<Region>();
 
   selectRegion(region: Region){
     this.selectedRegion = region;

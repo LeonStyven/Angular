@@ -17,10 +17,10 @@ export class CountryMapper {
             flagsvg: item.flags.svg,
             name: item.name.common ?? 'No Spanish Name',
             population: item.population,
-            capital: item.capital.join(','),
+            capital: item.capital?.join(',') ?? 'No capital',
             language: Object.values(item.languages)[0] ?? 'No language specified',
             borders: item.borders ?? [],
-            coatOfArms: item.coatOfArms.svg ?? '',
+            coatOfArms: item.coatOfArms?.svg ?? '',
             translations: Object.values(item.translations).map(t => `${t.common} (${t.official})`),
         };
     }
