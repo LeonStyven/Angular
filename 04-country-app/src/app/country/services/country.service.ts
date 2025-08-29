@@ -15,6 +15,7 @@ export class CountryService {
   private http = inject(HttpClient);
   private queryCacheCapital = new Map<string, Country[]>();
   private queryCacheCountry = new Map<string, Country[]>();
+  private queryCacheRegion = new Map<string, Country[]>();
 
 
 
@@ -75,5 +76,32 @@ export class CountryService {
         })
       )
   }
+
+  // * TODO: SearchCountriesByRegion
+
+
+  searchCountriesByRegion(regionQuery: string){
+    regionQuery = regionQuery.toLowerCase();
+
+    if (this.queryCacheRegion.has(regionQuery)){
+      return of(this.queryCacheCountry.get(regionQuery)!);
+    }
+
+    console.log('API')
+
+    return this.http.get<RESTCountry[]>(`${API_URL}/region/${regionQuery}`)
+    .pipe(
+      map(CountryMapper.mapRESTCountryArrayToCountryArray),
+      tap( countries => this.queryCacheRegion.set(regionQuery, countries)),
+      delay(1000),
+      catchError(error => {
+        console.log('Error fetching ', error);
+        
+        return throwError (() => new Error (`No se obtuvo ningun pais en la región ${regionQuery}`))
+      })
+    )
+  }
+
+
 
 }
