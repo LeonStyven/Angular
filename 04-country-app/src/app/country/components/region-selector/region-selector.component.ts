@@ -9,7 +9,15 @@ import type { Region } from '../../interfaces/region.type';
 })
 export class RegionSelectorComponent {
 
+  selectedRegion: string = '';
+
   regions = input<Region[]>([]);
   regionQuery = output<string>();
+
+  selectRegion(region: Region){
+    this.selectedRegion = region;
+    this.regionQuery.emit(region);
+
+  }
 
 }

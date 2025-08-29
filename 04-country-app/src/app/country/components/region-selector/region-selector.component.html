@@ -1,3 +1,7 @@
 @for (region of regions(); track $index) {
-    <button (click)="regionQuery.emit(region)" class="btn mr-1"> {{region}} </button>
+    <button 
+        (click)="selectRegion(region)" 
+        [class.btn-primary]="region === selectedRegion" 
+        class="btn btn-soft mr-1"> {{region}} 
+    </button>
 }

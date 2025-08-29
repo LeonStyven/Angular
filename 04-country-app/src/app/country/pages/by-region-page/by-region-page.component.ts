@@ -11,18 +11,19 @@ import { RegionSelectorComponent } from "../../components/region-selector/region
   templateUrl: './by-region-page.component.html',
 })
 export class ByRegionPageComponent {
-
+  public regions: Region[] = [
+      'Africa',
+      'Americas',
+      'Asia',
+      'Europe',
+      'Oceania',
+      'Antarctic',
+    ];
+    
   countryService = inject(CountryService);
   query = signal('');
 
-  public regions: Region[] = [
-    'Africa',
-    'Americas',
-    'Asia',
-    'Europe',
-    'Oceania',
-    'Antarctic',
-  ];
+  
 
   countryResource = resource({
 
